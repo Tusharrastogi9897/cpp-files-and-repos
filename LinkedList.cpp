@@ -12,11 +12,11 @@ class Node{
             ptr = this;
 
             cout<<"\n";
-            while(ptr != NULL){
-                cout << "Element: " << ptr -> data << "\n";
+            while(ptr){
+                cout << ptr -> data << " - > ";
                 ptr = ptr -> next;
             }
-            cout<<"\n";
+            cout<<"NULL\n\n";
 
         }
 
@@ -25,7 +25,7 @@ class Node{
             ptr = this;
             int size = 0;
 
-            while(ptr != NULL){
+            while(ptr){
                 size += 1;
                 ptr = ptr -> next;
             }
@@ -42,7 +42,7 @@ class Node{
             int size = 0;
             
             if(ptr -> sizeOf() >= pos)
-                while(ptr != NULL){
+                while(ptr){
                     if(pos == 0){
                         new_node -> next = ptr -> next;
                         new_node -> data = ptr -> data;
@@ -61,6 +61,33 @@ class Node{
                 }
             else
                 cout<<"\nCannot Insert value!!\n";
+        }
+
+        void deleteNode(int pos){
+            Node *ptr;
+            ptr = this;
+
+            int size = 0;
+            
+            if(ptr -> sizeOf() > pos){
+                while(ptr){
+                    if(pos == 0){
+                        ptr -> data = ptr -> next -> data;
+                        ptr -> next = ptr -> next -> next;
+                        break;
+                    } 
+                    else if((pos - 1) == size){
+                        if(ptr -> next)
+                            ptr -> next = ptr -> next -> next;
+                        else
+                            ptr -> next = NULL;
+                    }
+                    size += 1;
+                    ptr = ptr -> next; 
+                }
+            }
+            else
+                cout<<"\nIndex does not exist!!\n";
         }
 };
 
@@ -84,6 +111,11 @@ int main(){
     head -> insert(2, 78);
 
     cout<<"After insertion:";
+    head -> traverseLinkedList();
+
+    head -> deleteNode(0);
+
+    cout<<"After deletion:";
     head -> traverseLinkedList();
 
     return 0;
