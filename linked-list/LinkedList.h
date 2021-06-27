@@ -1,4 +1,5 @@
 #include<iostream>
+
 using namespace std;
 
 class Node{
@@ -30,6 +31,26 @@ class Node{
                 ptr = ptr -> next;
             }
             return size;
+        }
+
+        Node* find(int pos){
+            Node* ptr;
+            ptr = this;
+            int size = 0;
+
+            Node* found;
+            found = NULL;
+
+            while(ptr){
+                if(pos == size){
+                    found = ptr;
+                    break;
+                }
+                size += 1;
+                ptr = ptr -> next;
+            }
+
+            return found;
         }
 
         void insert(int pos, int data){
@@ -90,33 +111,3 @@ class Node{
                 cout<<"\nIndex does not exist!!\n";
         }
 };
-
-
-
-int main(){
-
-    Node* head;
-    Node* end;
-
-    head = new Node;
-    end = new Node;
-
-    head -> data = 98;
-    head -> next = end;
-
-    end -> data = 119;
-    end -> next = NULL;
-
-    head -> traverseLinkedList();
-    head -> insert(2, 78);
-
-    cout<<"After insertion:";
-    head -> traverseLinkedList();
-
-    head -> deleteNode(0);
-
-    cout<<"After deletion:";
-    head -> traverseLinkedList();
-
-    return 0;
-}
